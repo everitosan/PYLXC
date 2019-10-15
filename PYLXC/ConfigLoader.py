@@ -1,14 +1,25 @@
 import json
-from Logger import error as log_error
+from ConfigValidator import validate
+from Utils import exit
+
+required = ["name", "image", "componentsPath"]
 
 
 def loads_json(file_path=""):
+    """
+    Reads a config.json file and validates it
+    Returns a valid dict
+    """
     file = open(file_path, "r")
     data = file.read()
     try:
-        return json.loads(data)
+        dict_data = json.loads(data)
+        is_valid = validate(required, dict_data, raise_exception=True)
+        return dict_data
     except json.decoder.JSONDecodeError as e:
         error_msg = "Error en el archivo {} ...\n\n{}".format(
             file_path, str(e)
         )
-        log_error(error_msg)
+        exit(error_msg)
+    except Exception as e:
+        exit(str(e))

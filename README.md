@@ -13,6 +13,7 @@ This is the file that the tool will take as a manifest to create the components(
 {
   "name": "WalkSat2",
   "image": "ubuntu/bionic/amd64",
+  "componentsPath": "/home/ubuntu/",
   "env": {
     "http_proxy": "http://proxy.web.com:3128",
     "https_proxy": "http://proxy.web.com:3128"
@@ -27,7 +28,7 @@ This is the file that the tool will take as a manifest to create the components(
         "scripts/dependencies/prod.sh",
         "scripts/dependencies/pip.sh",
         "scripts/build/prod.sh"
-      ],
+      ]
     }, {
         "name": "Frontend",
         "gitRepo": "https://gitlab.com/repo.git",

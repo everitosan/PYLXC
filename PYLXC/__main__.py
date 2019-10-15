@@ -15,6 +15,11 @@ def launch_container(config):
     CONTAINER = LXC(image=config.get("image"), name=config.get("name"))
     try:
         CONTAINER.launch()
+        CONTAINER.set_components_path(config.get("componentsPath"))
+        git_cloner_path = "{}/bash/GitCloner.sh".format(
+            path.realpath(__file__)[:-11]
+        )
+        CONTAINER.file_push(git_cloner_path)
     except Exception as e:
         exit(str(e))
 
@@ -33,18 +38,12 @@ def initial_install(initial_scprit=None):
 
 
 def process_components(components=[]):
-    # import pdb; pdb.set_trace()
-    git_cloner_path = "{}/bash/GitCloner.sh".format(
-        path.realpath(__file__)[:-11]
-    )
-    CONTAINER.file_push(git_cloner_path)
-    for component in components:
-        print(component)
-        CONTAINER.execute_pushed("GitCloner.sh", [
-            component.get("gitRepo"),
-            component.get("gitBranch"),
-            component.get("name")
-        ])
+    """
+    Iterate components, clone them, and build them
+    """
+    CONTAINER.add_components(components)
+    CONTAINER.clone_components()
+    CONTAINER.install_components()
 
 
 if __name__ == "__main__":
@@ -55,4 +54,5 @@ if __name__ == "__main__":
     set_envs(config.get("env"))
     initial_install(config.get("initialScript"))
 
+    # Install components and build them
     process_components(config.get("components"))

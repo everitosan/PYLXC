@@ -4,7 +4,7 @@
 # $3 ComponentName
 ##
 
-cd /home/ubuntu/;
+cd $COMPONENTSPATH;
 git clone $1 $3;
 cd $3;
 pwd;
