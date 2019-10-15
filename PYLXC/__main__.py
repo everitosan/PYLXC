@@ -30,11 +30,11 @@ def set_envs(env_conf=None):
             CONTAINER.config_set(prop, env_conf[prop])
 
 
-def initial_install(initial_scprit=None):
+def install(script=None, delay=0):
 
-    if initial_scprit is not None:
-        sleep(5)
-        CONTAINER.file_push(initial_scprit, True)
+    if script is not None:
+        sleep(delay)
+        CONTAINER.file_push(script, True)
 
 
 def process_components(components=[]):
@@ -52,7 +52,9 @@ if __name__ == "__main__":
 
     launch_container(config)
     set_envs(config.get("env"))
-    initial_install(config.get("initialScript"))
+    install(config.get("initialScript"), 5)
 
     # Install components and build them
     process_components(config.get("components"))
+
+    install(config.get("finalScript"))
