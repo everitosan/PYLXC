@@ -3,9 +3,11 @@ from time import sleep
 from os import path
 
 # MODULES
-from LXC import LXC
+from Arguments import parse as parse_arguments
 from ConfigLoader import loads_json
+from LXC import LXC
 from Utils import exit
+from LXCExport import export as export_lxc
 
 CONTAINER = None
 
@@ -46,9 +48,12 @@ def process_components(components=[]):
     CONTAINER.install_components()
 
 
-if __name__ == "__main__":
+def create_from(config_file=None):
+    if config_file is None:
+        config_file = "./config.json"
+
     # Read condifguration
-    config = loads_json("./config.json")
+    config = loads_json(config_file)
 
     launch_container(config)
     set_envs(config.get("env"))
@@ -58,3 +63,11 @@ if __name__ == "__main__":
     process_components(config.get("components"))
 
     install(config.get("finalScript"))
+
+
+if __name__ == "__main__":
+    args = parse_arguments()
+    if args.export:
+        export_lxc(args.export)
+    else:
+        create_from(args.file)
