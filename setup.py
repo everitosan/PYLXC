@@ -14,7 +14,7 @@ setup(
     description="Automate lxc containers",
     long_description=README,
     long_description_content_type="text/markdown",
-    url="https://github.com/everitosan/PYLXC",
+    url="https://gitlab.sat.gob.mx/sat-dev/lxcpy.git",
     author="everitosan",
     author_email="eve.san.dev@gmail.com",
     license="MIT",
