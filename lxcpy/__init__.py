@@ -1,5 +1,5 @@
 """
 Version:
 --------
-- lxcpy v0.0.2
+- lxcpy v0.0.3
 """
