@@ -1,0 +1,5 @@
+{
+  "name": "containername",
+  "image": "image name",
+  "componentsPath": "path for components"
+}
