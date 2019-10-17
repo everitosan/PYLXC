@@ -1,6 +1,6 @@
-# python
-import subprocess
-
+"""
+Clas of a component to install in lxc
+"""
 # Modules
 from .ConfigValidator import validate
 

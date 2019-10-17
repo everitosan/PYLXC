@@ -61,7 +61,7 @@ def create_from(config_file=None):
     install(config.get("initialScript"), 5)
 
     # Install components and build them
-    process_components(config.get("components"))
+    process_components(config.get("components", []))
 
     install(config.get("finalScript"))
 

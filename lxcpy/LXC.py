@@ -2,12 +2,11 @@
 This class is an abstraction to run lxc commands for an specific
 conatainer name.
 """
-# Python
-import subprocess
 # LXC
 from .LXCComponent import LXCComponent
 from .Paths import PATHS
 from .Logger import warn
+from .Utils import execute as execute_in_os
 
 base_dir = PATHS.get("COPY_BASE")
 
@@ -24,7 +23,7 @@ class LXC():
             raise Exception("Nombre e imagen son requeridos")
         else:
             command = ["lxc", "launch", "images:"+self.image, self.name]
-            subprocess.call(command)
+            execute_in_os(command)
 
     def set_components_path(self, path):
         self.components_path = path
@@ -34,7 +33,7 @@ class LXC():
         command = [
             "lxc", "config", "set", self.name, "environment."+key, val
         ]
-        subprocess.call(command)
+        execute_in_os(command)
 
     def file_push(self, file_path, execute=False):
         """
@@ -52,7 +51,7 @@ class LXC():
             file_path,
             "{}{}".format(self.name, container_file_path)
         ]
-        subprocess.call(command)
+        execute_in_os(command)
         if execute:
             self.execute(["chmod", "744", container_file_path])
             self.execute([container_file_path])
@@ -68,7 +67,7 @@ class LXC():
     def execute(self, cmd=[]):
         command = ["lxc", "exec", self.name, "--"] + cmd
         warn(str(command))
-        subprocess.call(command)
+        execute_in_os(command)
 
     def add_components(self, components_list):
         for component in components_list:
