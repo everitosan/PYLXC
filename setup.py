@@ -10,7 +10,7 @@ README = (HERE / "README.md").read_text()
 # This call to setup() does all the work
 setup(
     name="lxcpy",
-    version="0.0.1",
+    version="0.0.2",
     description="Automate lxc containers",
     long_description=README,
     long_description_content_type="text/markdown",
@@ -28,7 +28,7 @@ setup(
     install_requires=["colorama"],
     entry_points={
         "console_scripts": [
-            "lxcpy=lxc.__main__:main",
+            "lxcpy=lxcpy.__main__:main",
         ]
     },
 )
