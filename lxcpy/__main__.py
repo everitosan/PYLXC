@@ -7,6 +7,7 @@ from .Arguments import parse as parse_arguments
 from .ConfigLoader import loads_json
 from .LXC import LXC
 from .Utils import exit
+from .Logger import info
 from .LXCExport import export as export_lxc
 
 CONTAINER = None
@@ -65,9 +66,16 @@ def create_from(config_file=None):
     install(config.get("finalScript"))
 
 
-if __name__ == "__main__":
+def main():
     args = parse_arguments()
     if args.export:
         export_lxc(args.export)
     else:
         create_from(args.file)
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        info("bye bye")
