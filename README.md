@@ -40,16 +40,16 @@ This is the file that the tool will take as a manifest to create the components(
 ```
 Once you have your **config** file, you can run the following command at the same directory level.
 ```
-LXCPY
+lxcpy
 ```
 
 If you want to specify the file.
 ```
-LXCPY -f path/to/file
+lxcpy -f path/to/file
 ```
 
 ## Export
 Export an already created container.
 ```
-LXCPY -e CONTAINER-NAME
+lxcpy -e CONTAINER-NAME
 ```
