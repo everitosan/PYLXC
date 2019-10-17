@@ -1,4 +1,4 @@
-# PYLXC
+# LXCPY
 
 |> Python based tool to create and export LXC containers.
 
@@ -19,6 +19,7 @@ This is the file that the tool will take as a manifest to create the components(
     "https_proxy": "http://proxy.web.com:3128"
   },
   "initialScript": "./init.sh",
+  "finalScript": "./final.sh",
   "components": [{
       "name": "Backend",
       "gitRepo": "https://gitlab.com/repo.git",
@@ -39,16 +40,16 @@ This is the file that the tool will take as a manifest to create the components(
 ```
 Once you have your **config** file, you can run the following command at the same directory level.
 ```
-PYLXC
+LXCPY
 ```
 
 If you want to specify the file.
 ```
-PYLXC -f path/to/file
+LXCPY -f path/to/file
 ```
 
 ## Export
 Export an already created container.
 ```
-PYLXC -e CONTAINER-NAME
+LXCPY -e CONTAINER-NAME
 ```
