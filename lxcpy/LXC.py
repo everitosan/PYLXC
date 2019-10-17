@@ -5,7 +5,6 @@ conatainer name.
 # LXC
 from .LXCComponent import LXCComponent
 from .Paths import PATHS
-from .Logger import warn
 from .Utils import execute as execute_in_os
 
 base_dir = PATHS.get("COPY_BASE")
@@ -18,7 +17,6 @@ class LXC():
         self.components = []
 
     def launch(self):
-
         if self.name == "" or self.image == "":
             raise Exception("Nombre e imagen son requeridos")
         else:
@@ -56,18 +54,17 @@ class LXC():
             self.execute(["chmod", "744", container_file_path])
             self.execute([container_file_path])
 
-    def execute_pushed(self, file, extras=[]):
+    def execute_pushed(self, file, extras=[], show_log=False):
         """
         Takes the index of the file pushed and executes it.
         """
         container_file_path = base_dir+file
         cmd = [container_file_path] + extras
-        self.execute(cmd)
+        self.execute(cmd, show_log)
 
-    def execute(self, cmd=[]):
+    def execute(self, cmd=[], show_log=False):
         command = ["lxc", "exec", self.name, "--"] + cmd
-        warn(str(command))
-        execute_in_os(command)
+        execute_in_os(command, show_log)
 
     def add_components(self, components_list):
         for component in components_list:
@@ -80,12 +77,11 @@ class LXC():
                 component.gitRepo,
                 component.gitBranch,
                 component.name
-            ])
+            ], True)
 
     def install_components(self):
         for component in self.components:
             if component.has_install_scripts():
                 for script in component.get_build_scripts():
                     script_path = self.components_path+script
-                    warn(script_path)
                     self.execute([script_path])

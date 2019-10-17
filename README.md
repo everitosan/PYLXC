@@ -11,7 +11,7 @@ This is the file that the tool will take as a manifest to create the components(
 
 ```json
 {
-  "name": "WalkSat2",
+  "name": "MYAPP",
   "image": "ubuntu/bionic/amd64",
   "componentsPath": "/home/ubuntu/",
   "env": {

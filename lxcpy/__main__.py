@@ -6,7 +6,7 @@ from os import path
 from .Arguments import parse as parse_arguments
 from .ConfigLoader import loads_json
 from .LXC import LXC
-from .Utils import exit
+from .Utils import exit, print_banner
 from .Logger import info
 from .LXCExport import export as export_lxc
 
@@ -14,6 +14,7 @@ CONTAINER = None
 
 
 def launch_container(config):
+    info("Creando contenedor")
     global CONTAINER
     CONTAINER = LXC(image=config.get("image"), name=config.get("name"))
     try:
@@ -28,14 +29,15 @@ def launch_container(config):
 
 
 def set_envs(env_conf=None):
+    info("Configurando variables de entorno")
     if env_conf is not None:
         for prop in env_conf.keys():
             CONTAINER.config_set(prop, env_conf[prop])
 
 
 def install(script=None, delay=0):
-
     if script is not None:
+        info("Instalando {}".format(script))
         sleep(delay)
         CONTAINER.file_push(script, True)
 
@@ -44,6 +46,7 @@ def process_components(components=[]):
     """
     Iterate components, clone them, and build them
     """
+    info("Instalando componentes")
     CONTAINER.add_components(components)
     CONTAINER.clone_components()
     CONTAINER.install_components()
@@ -55,7 +58,6 @@ def create_from(config_file=None):
 
     # Read condifguration
     config = loads_json(config_file)
-
     launch_container(config)
     set_envs(config.get("env"))
     install(config.get("initialScript"), 5)
@@ -65,8 +67,11 @@ def create_from(config_file=None):
 
     install(config.get("finalScript"))
 
+    info("OK")
+
 
 def main():
+    print_banner()
     args = parse_arguments()
     if args.export:
         export_lxc(args.export)
