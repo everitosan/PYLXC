@@ -23,12 +23,12 @@ setup(
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.6",
     ],
-    packages=[""],
+    packages=["lxcpy"],
     include_package_data=True,
     install_requires=["colorama"],
     entry_points={
         "console_scripts": [
-            "realpython=reader.__main__:main",
+            "lxcpy=lxc.__main__:main",
         ]
     },
 )
