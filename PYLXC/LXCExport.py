@@ -6,8 +6,8 @@ import subprocess
 from time import time
 
 # Utils
-from Utils import exit
-from Logger import info
+from .Utils import exit
+from .Logger import info
 
 
 def create_image(c_name, s_name, i_name):

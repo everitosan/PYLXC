@@ -3,11 +3,11 @@ from time import sleep
 from os import path
 
 # MODULES
-from Arguments import parse as parse_arguments
-from ConfigLoader import loads_json
-from LXC import LXC
-from Utils import exit
-from LXCExport import export as export_lxc
+from .Arguments import parse as parse_arguments
+from .ConfigLoader import loads_json
+from .LXC import LXC
+from .Utils import exit
+from .LXCExport import export as export_lxc
 
 CONTAINER = None
 

@@ -1,5 +1,5 @@
 import sys
-from Logger import error as log_error
+from .Logger import error as log_error
 
 
 def exit(msg=""):

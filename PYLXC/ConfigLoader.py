@@ -1,6 +1,6 @@
 import json
-from ConfigValidator import validate
-from Utils import exit
+from .ConfigValidator import validate
+from .Utils import exit
 
 required = ["name", "image", "componentsPath"]
 

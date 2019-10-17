@@ -5,9 +5,9 @@ conatainer name.
 # Python
 import subprocess
 # LXC
-from LXCComponent import LXCComponent
-from Paths import PATHS
-from Logger import warn
+from .LXCComponent import LXCComponent
+from .Paths import PATHS
+from .Logger import warn
 
 base_dir = PATHS.get("COPY_BASE")
 

@@ -2,7 +2,7 @@
 import subprocess
 
 # Modules
-from ConfigValidator import validate
+from .ConfigValidator import validate
 
 
 class LXCComponent():
