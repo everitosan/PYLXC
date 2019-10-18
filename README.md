@@ -45,7 +45,7 @@ lxcpy
 
 If you want to specify the file.
 ```
-lxcpy -f path/to/file
+lxcpy -f path/to/file.json
 ```
 
 ## Export
