@@ -14,6 +14,7 @@ This is the file that the tool will take as a manifest to create the components(
   "name": "MYAPP",
   "image": "ubuntu/bionic/amd64",
   "componentsPath": "/home/ubuntu/",
+  "mounts": ["/host/dir:container/dir"],
   "env": {
     "http_proxy": "http://proxy.web.com:3128",
     "https_proxy": "http://proxy.web.com:3128"

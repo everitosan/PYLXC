@@ -28,6 +28,16 @@ def launch_container(config):
         exit(str(e))
 
 
+def mount_from_host(mounts=None):
+    if mount is not None:
+        info("Montando directorios")
+        if type(mounts) is not list:
+            exit(str("Mounts debe ser un arreglo"))
+        CONTAINER.make_privilegred()
+        for mount in mounts:
+            CONTAINER.mount(mount)
+
+
 def set_envs(env_conf=None):
     info("Configurando variables de entorno")
     if env_conf is not None:
@@ -59,6 +69,7 @@ def create_from(config_file=None):
     # Read condifguration
     config = loads_json(config_file)
     launch_container(config)
+    mount_from_host(congig.get("mounts", []))
     set_envs(config.get("env"))
     install(config.get("initialScript"), 5)
 

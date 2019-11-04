@@ -23,6 +23,27 @@ class LXC():
             command = ["lxc", "launch", "images:"+self.image, self.name]
             execute_in_os(command)
 
+    def make_privilegred(self):
+        """
+        Make the container run in privileged mode
+        """
+        command = [
+            "lxc", "config", "set", self.name, "secutiry.privileged", "true"
+        ]
+        execute_in_os(command)
+
+    def mount(self, paths):
+        """
+        Take a string, splits it by ':' and mounts it in the container
+        """
+        host_dir, container_dir = paths.split(":")
+
+        command = [
+            "lxc", "config", "device", "add",
+            self.name, host_dir.split("/")[-1], "disk",
+            "source={}".format(host_dir), "path={}".format(container_dir)
+        ]
+
     def set_components_path(self, path):
         self.components_path = path
         self.config_set("COMPONENTSPATH", path)
