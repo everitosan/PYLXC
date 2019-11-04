@@ -3,3 +3,4 @@ colorama==0.4.1
 nose2==0.9.1
 bumpversion==0.5.3
 twine==2.0.0
+wheel==0.33.6
